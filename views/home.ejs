@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> To-Do</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../home.css">
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Domine&family=Prompt:wght@300&display=swap');
+  </style>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+
+        <form action="/create-task" method="POST">
+            <label for="desc" id="desc-label">Description</label><br>
+            <input type="text" placeholder="What do you need to do?" name = "description" id="desc" required ><br>
+
+           
+
+            <select id="Category" name ="category" required>
+                <option value="">Choose a Category</option>
+                <option value="Personal">Personal</option>
+                <option value="work">work</option>
+                <option value="school">school</option>
+                <option value="cleaning">cleaning</option>
+            </select>
+            
+            <label for="duedate">Due Date</label>
+            <input type="date"  name ="duedate" id ="duedate"required> <br>
+            <div class="flexbutton">
+              <input type="submit" value="Add Task"></div>
+            
+            
+        </form>
+        <% for (let i of task_list) { %>
+        <div class="task-display">
+            
+
+            <p><a href="/delete/task/<%= i.id %>"></a> <i class="bi bi-trash"> </i> <%= i.task%> </p>
+            
+            <% if(  i.category =='work'){ %>
+            <p id = "category-text" class = 'work'> <%= i.category%> </p>
+            
+            <% } %>
+
+            <% if(  i.category =='school'){ %>
+                <p id = "category-text" class = 'school'> <%= i.category%> </p>
+                
+            <% } %>
+
+            <% if(  i.category =='Personal'){ %>
+                <p id = "category-text" class = 'personal'> <%= i.category%> </p>
+                
+            <% } %>
+
+            <% if(  i.category =='cleaning'){ %>
+                    <p id = "category-text" class = 'cleaning'> <%= i.category%> </p>
+                    
+            <% } %>
+
+
+
+
+
+
+        </div>
+        <% } %>
+        <!-- <form action="/delete/task" method="get">
+            <div class="listItem">
+              <h1>Your Task Here </h1>
+              <ul class="list-group my-3" id="myUL">
+                <% for(let i of task_list) {%>
+                  <li class="list-group-item  " aria-current="true">
+                    <p style="font-size: 25px;">
+                      <input type="checkbox" name="<%= i._id %>" >
+                      <%=i.description%>
+                    </p> <span>
+                      <i class="fa-solid fa-calendar-days"></i>
+                      <%=i.date%>
+                    </span>
+                    <button class="btn  btn-success mx-5 ">             
+                      <%=i.category%>    
+                    </button>
+                    </a></p> 
+                    <!-- <a href="<%= i._id %>"><button type="submit" class="btn btn-warning">Update
+                        Task</button> </a> -->
+                 
+                  <!-- </li>
+                  <%}%>
+              </ul>
+            </div>
+              <input type="submit"  class="btn btn-danger " style="margin-left: 44%; margin-bottom: 10px; "  value="Delete All Task  ">
+          </form> --> 
+
+        
+    </div>
+</body>
+</html>
